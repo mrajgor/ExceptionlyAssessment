@@ -3,6 +3,9 @@ package ionic;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import java.util.concurrent.TimeUnit;
 
 public class IonicPartnersClass {
     private WebDriver driver;
@@ -27,17 +30,21 @@ public class IonicPartnersClass {
     }
 
     public String getBlogPage () {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return driver.findElement(statusBlogPage).getText();
     }
 
     public IonicPartnersClass scrollIconicPartnerFooter () {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, document.body.scrollHeight)");
         driver.findElement(iconicPartnerFooter).isDisplayed();
         return new IonicPartnersClass(driver);
     }
 
-    public void clickAboutUs () {
+    public IonicPartnersClass clickAboutUs () {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElement(about).click();
+        return new IonicPartnersClass(driver);
     }
 
     public IonicPartnersClass getAboutUsPageStatus () {
@@ -46,11 +53,13 @@ public class IonicPartnersClass {
     }
 
     public IonicPartnersClass clickTwitter () {
-        driver.findElement(twitter).click();
+        WebDriverWait waitElement = new WebDriverWait(driver,10);
+        waitElement.until(ExpectedConditions.elementToBeClickable(twitter)).click();
         return new IonicPartnersClass(driver);
     }
 
     public IonicPartnersClass getTwitterPageStatus () {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElement(statusTwitterPage).getText();
         return new IonicPartnersClass(driver);
     }

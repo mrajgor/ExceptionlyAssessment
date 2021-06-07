@@ -1,5 +1,6 @@
 package base;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import ionic.IonicPartnersClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,7 +13,7 @@ public class BaseTests {
 
     @BeforeClass
     public void setUp() throws InterruptedException {
-        System.setProperty("webdriver.chrome.driver", "resources/chromedriver");
+        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.get("https://www.ionicpartners.com/");
         driver.manage().window().maximize();
